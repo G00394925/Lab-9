@@ -1,4 +1,4 @@
-import MovieItem from './movieitem';
+import MovieItem from './MovieItem';
 
 const Movies = (props) => {
     return props.myMovies.map(
