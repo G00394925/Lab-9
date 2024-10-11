@@ -4,8 +4,8 @@ import NavigationBar from './components/NavigationBar';
 import Header from './components/header';
 import Footer from './components/footer';
 import Content from './components/content';
-import Read from './components/read'
-import Create from './components/create'
+import Read from './components/read';
+import Create from './components/create';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Content />} />
         <Route path="/read" element={<Read />} />
-        <Route path="/create" element={<Footer></Footer>} />
+        <Route path="/create" element={<Create />} />
       </Routes>
       <Footer />
     </Router>
