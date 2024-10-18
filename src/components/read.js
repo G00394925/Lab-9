@@ -1,6 +1,4 @@
 import Movies from './movies';
-import { useEffect } from "react";
-import axios from "axios";
 
 const Read = () => {
     const data = [
@@ -26,14 +24,6 @@ const Read = () => {
           "Poster": "https://m.media-amazon.com/images/M/MV5BNDQ4YzFmNzktMmM5ZC00MDZjLTk1OTktNDE2ODE4YjM2MjJjXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
         }
       ];
-
-    useEffect(() => {
-      axios.get('https://jsonblob.com/api/jsonblob/1287718524221775872')
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch();
-    });
 
     return (
         <div>
