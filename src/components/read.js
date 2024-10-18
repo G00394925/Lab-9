@@ -27,8 +27,9 @@ const Read = () => {
         }
       ];
 
-    const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState([]); // Store movie data
 
+    
     useEffect(() => {
       axios.get('https://jsonblob.com/api/jsonblob/1287718524221775872')
       .then((response) => {

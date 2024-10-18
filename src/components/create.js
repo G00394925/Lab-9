@@ -6,6 +6,7 @@ const Create = () => {
     const [year, setYear] = useState('');
     const [poster, setPoster] = useState('');
 
+    // Submit button is clicked - details added to console
     const handleSubmit = (e) => {
         e.preventDefault();
         const movie = {title, year, poster};
@@ -15,6 +16,7 @@ const Create = () => {
     return(
         <div>
             <h3>Hello from create component</h3>
+            
             <form onSubmit = {handleSubmit}>
                 <div className="form-group">
                     <label>Add Movie Title: </label>
@@ -42,8 +44,6 @@ const Create = () => {
                         onChange = {(e) => {setPoster(e.target.value)}}
                         />
                 </div>
- 
- 
                 
                 <div>
                     <input type="submit" value="Add Movie"></input>
