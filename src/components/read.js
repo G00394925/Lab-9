@@ -31,7 +31,7 @@ const Read = () => {
 
     
     useEffect(() => {
-      axios.get('https://localhost:4000/api/movies')
+      axios.get('http://localhost:4000/api/movies')
       .then((response) => {
         console.log(response.data);
         setMovies(response.data.movies);
@@ -44,7 +44,7 @@ const Read = () => {
     return (
         <div>
             <h3>Hello from read component</h3>
-            <Movies myMovies = {data}/>
+            <Movies myMovies = {movies}/>
         </div>
     )
 }

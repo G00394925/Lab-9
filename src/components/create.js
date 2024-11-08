@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios"; 
 
 const Create = () => {
     
@@ -11,6 +12,10 @@ const Create = () => {
         e.preventDefault();
         const movie = {title, year, poster};
         console.log(movie);
+
+        axios.post('http://localhost:4000/api/movies', movie)
+        .then((res) => {console.log(res.data)})
+        .catch()
     }
 
     return(
