@@ -31,7 +31,7 @@ const Read = () => {
 
     
     useEffect(() => {
-      axios.get('https://jsonblob.com/api/jsonblob/1287718524221775872')
+      axios.get('https://localhost:4000/api/movies')
       .then((response) => {
         console.log(response.data);
         setMovies(response.data.movies);
