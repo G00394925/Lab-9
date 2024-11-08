@@ -3,7 +3,7 @@ const app = express();
 const port = 4000;
 
 const cors = require('cors');
-app.use(cors());
+app.use(cors()); // Cross-Origin Resource Sharing that allows communication between the server and client
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -12,11 +12,12 @@ app.use(function(req, res, next) {
   next();
 });
 
+// Use bodyParser to handle POST requests
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/api/movies', (req, res) => {
+app.get('/api/movies', (req, res) => { // Movies stored
     const movies = [
         {
             "Title": "Avengers: Infinity War",
@@ -41,11 +42,11 @@ app.get('/api/movies', (req, res) => {
             "Poster": "https://m.media-amazon.com/images/M/MV5BNDQ4YzFmNzktMmM5ZC00MDZjLTk1OTktNDE2ODE4YjM2MjJjXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
         }
     ];
-    res.status(200).json({movies})
+    res.status(200).json({movies}) // Respond with the JSON 
 });
 
-app.post('/api/movies', (req, res) => {
-    console.log(req.body.title);
+app.post('/api/movies', (req, res) => { // Client can send own movie details 
+    console.log(req.body.title); // Output title to console
     res.send("Movie Added");
 })
 

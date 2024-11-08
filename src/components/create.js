@@ -13,7 +13,7 @@ const Create = () => {
         const movie = {title, year, poster};
         console.log(movie);
 
-        axios.post('http://localhost:4000/api/movies', movie)
+        axios.post('http://localhost:4000/api/movies', movie) // Added to server 
         .then((res) => {console.log(res.data)})
         .catch()
     }
