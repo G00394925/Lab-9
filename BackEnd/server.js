@@ -17,9 +17,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Connect to MongoDB
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:admin@cluster0.zoem5.mongodb.net/DB14');
 
+// Create a data model for the movie data
 const movieSchema = new mongoose.Schema({
     title:String,
     year:String,
@@ -28,17 +30,25 @@ const movieSchema = new mongoose.Schema({
 
 const movieModel = new mongoose.model('myMovies', movieSchema);
 
-app.get('/api/movies', async (req, res) => { // Movies stored
-    const movies = await movieModel.find({});
+// Retrieve movie records from database
+app.get('/api/movies', async (req, res) => { 
+    const movies = await movieModel.find({}); // Fetch documents from 'movies' collection
     res.status(200).json({movies}) // Respond with the JSON 
 });
 
+// Search for movies in database by ID
+app.get('/api/movies/:id', async (req,res) => {
+    const movie = await movieModel.findById(req.params.id);
+    res.json(movie);
+})
+
+// Add the data to MongoDB
 app.post('/api/movies', async (req, res) => { // Client can send own movie details 
     console.log(req.body.title); // Output title to console
     const {title, year, poster} = req.body;
 
     const newMovie = new movieModel({title, year, poster});
-    await newMovie.save();
+    await newMovie.save(); // Ensures the movie is saved to the database before continuing on
 
     res.status(201).json({message: 'Movie created successfully', Movie:newMovie});
 })
