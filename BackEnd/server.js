@@ -17,17 +17,28 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://admin:admin@cluster0.zoem5.mongodb.net/DB14');
+
+const movieSchema = new mongoose.Schema({
+    title:String,
+    year:String,
+    poster:String
+});
+
+const movieModel = new mongoose.model('myMovies', movieSchema);
+
 app.get('/api/movies', (req, res) => { // Movies stored
     const movies = [
         {
-            "Title": "Avengers: Infinity War",
+            "Title": "Avengers: Infinity War (Server)",
             "Year": "2018",
             "imdbID": "tt4154756",
             "Type": "movie",
             "Poster": "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"
         },
         {
-            "Title": "Captain America: Civil War",
+            "Title": "Captain America: Civil War (Server)",
             "Year": "2016",
             "imdbID": "tt3498820",
             "Type": "movie",
@@ -35,7 +46,7 @@ app.get('/api/movies', (req, res) => { // Movies stored
 
         },
         {
-            "Title": "World War Z",
+            "Title": "World War Z (Server)",
             "Year": "2013",
             "imdbID": "tt0816711",
             "Type": "movie",
@@ -45,9 +56,14 @@ app.get('/api/movies', (req, res) => { // Movies stored
     res.status(200).json({movies}) // Respond with the JSON 
 });
 
-app.post('/api/movies', (req, res) => { // Client can send own movie details 
+app.post('/api/movies', async (req, res) => { // Client can send own movie details 
     console.log(req.body.title); // Output title to console
-    res.send("Movie Added");
+    const {title, year, poster} = req.body;
+
+    const newMovie = new movieModel({title, year, poster});
+    await newMovie.save();
+
+    res.status(201).json({message: 'Movie created successfully', Movie:newMovie});
 })
 
 app.listen(port, () => {
