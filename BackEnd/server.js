@@ -28,31 +28,8 @@ const movieSchema = new mongoose.Schema({
 
 const movieModel = new mongoose.model('myMovies', movieSchema);
 
-app.get('/api/movies', (req, res) => { // Movies stored
-    const movies = [
-        {
-            "Title": "Avengers: Infinity War (Server)",
-            "Year": "2018",
-            "imdbID": "tt4154756",
-            "Type": "movie",
-            "Poster": "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"
-        },
-        {
-            "Title": "Captain America: Civil War (Server)",
-            "Year": "2016",
-            "imdbID": "tt3498820",
-            "Type": "movie",
-            "Poster": "https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SX300.jpg"
-
-        },
-        {
-            "Title": "World War Z (Server)",
-            "Year": "2013",
-            "imdbID": "tt0816711",
-            "Type": "movie",
-            "Poster": "https://m.media-amazon.com/images/M/MV5BNDQ4YzFmNzktMmM5ZC00MDZjLTk1OTktNDE2ODE4YjM2MjJjXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
-        }
-    ];
+app.get('/api/movies', async (req, res) => { // Movies stored
+    const movies = await movieModel.find({});
     res.status(200).json({movies}) // Respond with the JSON 
 });
 
@@ -69,3 +46,28 @@ app.post('/api/movies', async (req, res) => { // Client can send own movie detai
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
+// [
+//     {
+//         "Title": "Avengers: Infinity War (Server)",
+//         "Year": "2018",
+//         "imdbID": "tt4154756",
+//         "Type": "movie",
+//         "Poster": "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"
+//     },
+//     {
+//         "Title": "Captain America: Civil War (Server)",
+//         "Year": "2016",
+//         "imdbID": "tt3498820",
+//         "Type": "movie",
+//         "Poster": "https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SX300.jpg"
+
+//     },
+//     {
+//         "Title": "World War Z (Server)",
+//         "Year": "2013",
+//         "imdbID": "tt0816711",
+//         "Type": "movie",
+//         "Poster": "https://m.media-amazon.com/images/M/MV5BNDQ4YzFmNzktMmM5ZC00MDZjLTk1OTktNDE2ODE4YjM2MjJjXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
+//     }
+// ];
