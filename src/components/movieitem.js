@@ -19,6 +19,7 @@ const MovieItem = (props) => {
                         <footer>{props.mymovie.year}</footer>
                     </blockquote>
                 </Card.Body>
+                
                 <Link className="btn btn-primary" to={"/edit/" + props.mymovie._id}>Edit</Link>
             </Card>
         </div>

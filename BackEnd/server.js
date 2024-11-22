@@ -42,6 +42,16 @@ app.get('/api/movies/:id', async (req,res) => {
     res.json(movie);
 })
 
+app.get('/api/movie/:id', async (req, res) => {
+    let movie = await movieModel.findById({ _id: req.params.id });
+    res.send(movie);
+});
+
+app.put('/api/movie/:id', async (req, res) => {
+    let movie = await movieModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.send(movie);
+});
+
 // Add the data to MongoDB
 app.post('/api/movies', async (req, res) => { // Client can send own movie details 
     console.log(req.body.title); // Output title to console
