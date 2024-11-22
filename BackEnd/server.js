@@ -42,11 +42,13 @@ app.get('/api/movies/:id', async (req,res) => {
     res.json(movie);
 })
 
+// Retrieve the current movie details by ID for editing
 app.get('/api/movie/:id', async (req, res) => {
     let movie = await movieModel.findById({ _id: req.params.id });
     res.send(movie);
 });
 
+// Update the movie details that user edited and send them to database. Server returns updated movie details to confirm the change
 app.put('/api/movie/:id', async (req, res) => {
     let movie = await movieModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.send(movie);

@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Content />} />
         <Route path="/read" element={<Read />} />
         <Route path="/create" element={<Create />} />
-        <Route path='/edit/:id' element={<Edit />} />
+        <Route path='/edit/:id' element={<Edit /> } /> {/* The ID is captured from the URL and passed to the Edit component allowing for movie data updates*/}
       </Routes>
       <Footer />
     </Router>
