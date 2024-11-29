@@ -54,6 +54,12 @@ app.put('/api/movie/:id', async (req, res) => {
     res.send(movie);
 });
 
+app.delete('api/movie/:id', async (req, res) => {
+    console.log('Deleting movie with ID: ' + req.params.id);
+    const movie = await movieModel.findByIDAndDelete(req.params.id);
+    res.status(200).send({ message: "Movie deleted successfully", movie});
+})
+
 // Add the data to MongoDB
 app.post('/api/movies', async (req, res) => { // Client can send own movie details 
     console.log(req.body.title); // Output title to console
