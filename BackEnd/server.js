@@ -54,22 +54,22 @@ app.put('/api/movie/:id', async (req, res) => {
     res.send(movie);
 });
 
-app.delete('/api/movie/:id', async (req, res) => {
-  
-    console.log('Deleting movie with ID:', req.params.id);
-    const movie = await movieModel.findByIdAndDelete(req.params.id);
-    res.status(200).send({ message: "Movie deleted successfully", movie });
-})
-
 // Add the data to MongoDB
 app.post('/api/movies', async (req, res) => { // Client can send own movie details 
     console.log(req.body.title); // Output title to console
     const {title, year, poster} = req.body;
-
+    
     const newMovie = new movieModel({title, year, poster});
     await newMovie.save(); // Ensures the movie is saved to the database before continuing on
-
+    
     res.status(201).json({message: 'Movie created successfully', Movie:newMovie});
+})
+
+// Handle delete requests by removing movie from the MongoDB database by ID
+app.delete('/api/movie/:id', async (req, res) => {
+    console.log('Deleting movie with ID:', req.params.id);
+    const movie = await movieModel.findByIdAndDelete(req.params.id);
+    res.status(200).send({ message: "Movie deleted successfully", movie });
 })
 
 app.listen(port, () => {

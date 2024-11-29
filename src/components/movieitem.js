@@ -13,10 +13,10 @@ const MovieItem = (props) => {
         e.preventDefault();
 
         axios.delete('http://localhost:4000/api/movie/' + props.mymovie._id)
-            .then((res) => {
-                props.Reload();
+            .then((res) => { // Delete is succesful 
+                props.Reload(); // Refresh movie list after deleting
             })
-            .catch((error) => {
+            .catch((error) => { // Delete unsuccessful 
                 console.error("Error deleting movie: ", error);
             });
     }
@@ -33,6 +33,7 @@ const MovieItem = (props) => {
                 </Card.Body>
                 {/* Edit button is added under every movie item. 'to' attribute defines the path that Link component should navigate to when clicked*/}
                 <Link className="btn btn-primary" to={"/edit/" + props.mymovie._id}>Edit</Link>
+                {/* Add a delete button to every movieItem, sending a DELETE request with the movie ID to the server. The movie is deleted from the MongoDB database and list is automatically refreshed*/}
                 <Button className="btn btn-danger" onClick={handleDelete}>Delete</Button>
             </Card>
         </div>

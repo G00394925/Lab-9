@@ -6,7 +6,8 @@ const Read = () => {
 
     const [movies, setMovies] = useState([]); // Store movie data
 
-    const ReloadData = () => {
+    // Fetches the updated movie data from the server and update the state
+    const ReloadData = () => { 
       axios.get('http://localhost:4000/api/movies')
         .then((response) => {
           console.log(response.data);
@@ -18,7 +19,7 @@ const Read = () => {
     }
 
     useEffect(() => {
-      ReloadData();
+      ReloadData(); // Rerfresh the page 
       axios.get('http://localhost:4000/api/movies') // Get movie data from the server
       .then((response) => {
         console.log(response.data);
